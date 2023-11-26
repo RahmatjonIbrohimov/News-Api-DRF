@@ -20,10 +20,21 @@ class NewsZaminUzView(APIView):
             photo = f" https://zamin.uz/{item.find('a', class_='short-img').find('img')['src']}"
             link = item.find('a', class_='short-img')['href']
             title = item.find('a', class_='short-title').text.strip()
-            # content = item.find('div', class_='short-description')
 
+            # Berilgan Linkga kirib u yerdan 'Description'ni olib keladi
+            link_response = requests.get(link)
+            link_soup = BeautifulSoup(link_response.text, 'html.parser')
+            p_tags = link_soup.find_all('p')
+            date_description = link_soup.find('div', class_='fcat').text
 
-            item_data = {'Photo':photo, 'Title': title, 'Url': link}
+            testval = []
+            for p in p_tags:
+                p_tag = p.text.strip()
+                if len(p_tag) > 2:
+                    testval.append(p_tag)
+                content = ''.join(testval)[0:123]
+
+            item_data = {'Photo':photo, 'Title': title, 'Url': link, 'Description': content, 'Date': date_description[9:]}
             data_zamin.append(item_data)
 
         return Response(data_zamin)
