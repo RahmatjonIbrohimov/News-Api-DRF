@@ -5,7 +5,26 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 
-class HelloAPIView(APIView):
+class NewsZaminUzView(APIView):
     def get(self, request):
-        respond = {'Remember': 'Hello, This is News Api using Django Rest Framework!'}
-        return Response(respond, status=status.HTTP_200_OK)
+
+        url = 'https://zamin.uz/uz/'
+        response = requests.get(url)
+
+        soup = BeautifulSoup(response.text, 'html.parser')
+        short_items = soup.find_all('div', class_='short-item')
+
+        data_zamin = [] 
+
+        for item in short_items:
+            photo = f" https://zamin.uz/{item.find('a', class_='short-img').find('img')['src']}"
+            link = item.find('a', class_='short-img')['href']
+            title = item.find('a', class_='short-title').text.strip()
+            # content = item.find('div', class_='short-description')
+
+
+            item_data = {'Photo':photo, 'Title': title, 'Url': link}
+            data_zamin.append(item_data)
+
+        return Response(data_zamin)
+    
