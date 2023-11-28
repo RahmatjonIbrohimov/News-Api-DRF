@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'apiv2',
     'api.apps.ApiConfig', # api 
     'rest_framework', # third party package
     'django.contrib.admin',
