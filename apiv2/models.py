@@ -9,4 +9,4 @@ class NewsKeeperModel(models.Model):
     date = models.CharField(max_length=12)
 
     class Meta:
-        db_table = 'LatestNews'
+        db_table = 'LatestNewsApiV2'
