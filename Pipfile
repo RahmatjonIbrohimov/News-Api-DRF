@@ -12,6 +12,7 @@ beautifulsoup4 = "*"
 django-filter = "*"
 whitenoise = "*"
 psycopg2 = "*"
+psycopg-binary = "*"
 
 [dev-packages]
 
