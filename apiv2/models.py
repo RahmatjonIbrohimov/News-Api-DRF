@@ -6,7 +6,7 @@ class NewsKeeperModel(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField()
     description = models.TextField()
-    date = models.CharField(max_length=12)
+    date = models.CharField(max_length=11)
 
     class Meta:
         db_table = 'LatestNewsApiV2'
