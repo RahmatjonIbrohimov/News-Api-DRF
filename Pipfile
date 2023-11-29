@@ -9,6 +9,7 @@ djangorestframework = "*"
 drf-spectacular = "*"
 requests = "*"
 beautifulsoup4 = "*"
+django-filter = "*"
 
 [dev-packages]
 
