@@ -42,7 +42,7 @@ class NewsZaminUzView(APIView):
                 )
                 news_data.save()
 
-            item_data = {'Photo': photo, 'Title': title, 'Url': link, 'Description': content, 'Date': date_description[9:]}
+            item_data = {'Photo': photo, 'Title': title, 'Url': link, 'Description': content, 'Date': date_description[9:19]}
             data_zamin.append(item_data)
 
         return Response(data_zamin)
