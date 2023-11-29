@@ -32,14 +32,15 @@ class NewsZaminUzView(APIView):
                     testval.append(p_tag)
                 content = ''.join(testval)[0:123]
 
-            news_data = NewsKeeperModel(
-                photo=photo,
-                title=title,
-                url=link,
-                description=content,
-                date=date_description[9:]
-            )
-            news_data.save()
+            if not NewsKeeperModel.objects.filter(url=link).exists():
+                news_data = NewsKeeperModel(
+                    photo=photo,
+                    title=title,
+                    url=link,
+                    description=content,
+                    date=date_description[9:]
+                )
+                news_data.save()
 
             item_data = {'Photo': photo, 'Title': title, 'Url': link, 'Description': content, 'Date': date_description[9:]}
             data_zamin.append(item_data)
