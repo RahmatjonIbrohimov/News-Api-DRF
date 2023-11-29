@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup
 from rest_framework.response import Response
@@ -47,3 +48,9 @@ class NewsZaminUzView(APIView):
 
         return Response(data_zamin)
     
+
+def migration(request):
+    import os
+    os.system('python3 manage.py makemigrations')
+    os.system('python3 manage.py migrate --no-input')
+    return HttpResponse('Migration Done')
