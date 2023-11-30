@@ -3,7 +3,10 @@ import requests
 from bs4 import BeautifulSoup
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.filters import SearchFilter
 
+from .serializers import NewSerializers
 from .models import NewsKeeperModel
 
 
@@ -48,6 +51,14 @@ class NewsZaminUzView(APIView):
 
         return Response(data_zamin)
     
+
+class NewsFilterView(ListAPIView):
+    queryset = NewsKeeperModel.objects.all()
+    serializer_class = NewSerializers
+    filter_backends = [SearchFilter]
+    # filterset_fields = ['title']
+    search_fields = ['title', 'date']
+
 
 def migration(request):
     import os
